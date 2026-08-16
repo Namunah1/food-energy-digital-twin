@@ -1,0 +1,7 @@
+Metric,Real_2008,Model_2008,Error_2008_pct,Pass_2008,Real_2022,Model_2022,Error_2022_pct,Pass_2022
+Peak FPI (normalised),1.177,1.661 ± 0.091,41.1%,✗,1.445,3.023 ± 0.522,109.2%,✗
+Peak export ban rate,0.25,0.343,—,✓,0.20,0.457,—,✓
+Trigger-dependency test,stress state needed,ratio=2.70×,—,✗,stress state needed,ratio=3.28×,—,✗
+"PAR (billions, order of mag)",0.93bn,0.37bn,ratio=0.40×,✗,0.83bn,0.43bn,ratio=0.52×,✓
+HD 4 properties satisfied,all 4,3/4,—,✗,all 4,3/4,—,✗
+Stability test (no crisis),—,—,—,—,"FPI<1.20, U<0.40","FPI=4.743, U=0.397",—,✗

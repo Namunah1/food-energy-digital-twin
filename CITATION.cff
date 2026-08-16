@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite it as below.
+  Author names, ORCID, and DOI are placeholders -- fill in
+  before public release. This file was not previously specified
+  in any prior session; generated as a standard scaffold expected
+  for a public academic software release.
+title: >-
+  Global Food-Energy Systemic Risk Digital Twin: A 35-Node
+  Agent-Based Model for Food-System Policy Optimisation
+type: software
+authors:
+  - family-names: "[TO BE FILLED IN]"
+    given-names: "[TO BE FILLED IN]"
+    affiliation: "[TO BE FILLED IN]"
+    orcid: "[TO BE FILLED IN]"
+repository-code: "[TO BE FILLED IN -- GitHub URL upon release]"
+abstract: >-
+  A 35-node (21 countries + 14 regional blocs) agent-based model of the
+  global food-energy system, built on the Homer-Dixon Limited-Fuse-Big-Bang
+  framework, coupled through a calibrated trade network, with historical
+  retrodiction against the 2008, 2010-11, 2019-20, and 2022 food-price
+  crises, a scenario catalogue of historical and counterfactual
+  experiments, and a policy-search layer for multi-country intervention
+  optimisation.
+keywords:
+  - agent-based model
+  - food security
+  - systemic risk
+  - digital twin
+  - policy optimization
+  - Mesa
+license: MIT
+version: "0.1.0-prerelease"
+date-released: "[TO BE FILLED IN]"
+preferred-citation:
+  type: conference-paper
+  title: "[Paper title -- see publication/PAPER_OUTLINE.md]"
+  authors:
+    - family-names: "[TO BE FILLED IN]"
+      given-names: "[TO BE FILLED IN]"
+  conference:
+    name: "American Society of Agricultural and Biological Engineers (ASABE)"
+  year: 2026

@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  /* Base */
+  --color-abyss:      #080B0F;   /* page background */
+  --color-panel:      #0E141B;   /* card/panel surface */
+  --color-panel-2:    #131B24;   /* elevated surface */
+  --color-hairline:   #1E2833;   /* borders/dividers */
+  --color-hairline-2: #29343F;
+
+  /* Text */
+  --color-ink-1: #EDF2F6;
+  --color-ink-2: #94A3B3;
+  --color-ink-3: #5B6B7A;
+
+  /* Signal palette */
+  --color-teal:    #3FC7BE;
+  --color-amber:   #E8A33D;
+  --color-crimson: #DB5A46;
+  --color-azure:   #5B8DEF;
+  --color-violet:  #8A7CDC;
+
+  --font-display: "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-abyss: var(--color-abyss);
+  --color-panel: var(--color-panel);
+  --color-panel-2: var(--color-panel-2);
+  --color-hairline: var(--color-hairline);
+  --color-hairline-2: var(--color-hairline-2);
+  --color-ink-1: var(--color-ink-1);
+  --color-ink-2: var(--color-ink-2);
+  --color-ink-3: var(--color-ink-3);
+  --color-teal: var(--color-teal);
+  --color-amber: var(--color-amber);
+  --color-crimson: var(--color-crimson);
+  --color-azure: var(--color-azure);
+  --color-violet: var(--color-violet);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* { border-color: var(--color-hairline); }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-abyss);
+  color: var(--color-ink-1);
+  font-family: var(--font-body);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(63,199,190,0.06), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(90,141,239,0.05), transparent 45%);
+}
+
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+::selection { background: rgba(63, 199, 190, 0.3); color: #fff; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-abyss); }
+::-webkit-scrollbar-thumb { background: var(--color-hairline-2); border-radius: 4px; }
+
+@keyframes pulse-line {
+  0%   { stroke-dashoffset: 24; opacity: 0.35; }
+  50%  { opacity: 0.9; }
+  100% { stroke-dashoffset: 0; opacity: 0.35; }
+}
+.stress-flow { stroke-dasharray: 4 4; animation: pulse-line 2.4s linear infinite; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stress-flow, .animate-fade-up { animation: none !important; }
+}
+
+.leaflet-container { background: var(--color-abyss) !important; font-family: var(--font-body), sans-serif; }
+/* Faint fallback grid so the map area never looks like a dead void when
+   third-party tile requests are blocked by an ad-blocker, corporate proxy,
+   or DNS filter (node markers/edges are unaffected either way — they're
+   plain SVG, not tile images). */
+.map-fallback-bg {
+  background-image:
+    linear-gradient(rgba(148, 163, 179, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 179, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: var(--color-panel-2);
+  color: var(--color-ink-1);
+  border: 1px solid var(--color-hairline-2);
+}
+.leaflet-popup-content-wrapper { border-radius: 10px; }
+.leaflet-control-zoom a {
+  background: var(--color-panel-2) !important;
+  color: var(--color-ink-1) !important;
+  border-color: var(--color-hairline-2) !important;
+}

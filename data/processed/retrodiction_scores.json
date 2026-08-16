@@ -1,0 +1,23 @@
+{
+  "2008_score1_fpi": false,
+  "2008_score2_eb": true,
+  "2008_score4_par": false,
+  "2008_score5_hd": false,
+  "2008_score3_td": false,
+  "2022_score1_fpi": false,
+  "2022_score2_eb": true,
+  "2022_score4_par": true,
+  "2022_score5_hd": false,
+  "2022_score3_td": false,
+  "2011_score1_fpi": false,
+  "2011_score2_eb": false,
+  "2011_score4_par": true,
+  "2011_score5_hd": false,
+  "2020_score1_fpi": false,
+  "2020_score2_eb": true,
+  "2020_score4_par": true,
+  "2020_score5_hd": false,
+  "stability_all_pass": false,
+  "network_hubs_pass": false,
+  "pom_score": 0.3
+}

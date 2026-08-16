@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-energy-backend
+  namespace: food-energy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: food-energy-backend
+  template:
+    metadata:
+      labels:
+        app: food-energy-backend
+    spec:
+      containers:
+        - name: backend
+          image: repo-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000

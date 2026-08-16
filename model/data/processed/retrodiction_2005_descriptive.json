@@ -1,0 +1,8 @@
+{
+  "descriptive_only": true,
+  "note": "Regional crisis (real global FPI stayed 0.656-0.674, well below the 1.0 baseline) -- not comparable to the 2008/2022/2011/2020 global-FPI-scored episodes. Real-world anchor: 2.5-3.3M people affected in Niger (WFP/OCHA), not directly comparable to this bloc-level model's West Africa PAR output.",
+  "model_max_price_index": 5.0,
+  "model_max_PAR_millions": 537.27,
+  "model_max_n_overload_food": 20,
+  "real_par_niger_millions": "2.5-3.3 (WFP/OCHA, national Niger figure, not bloc-comparable)"
+}

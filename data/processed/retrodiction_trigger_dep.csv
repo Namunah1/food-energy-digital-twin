@@ -1,0 +1,3 @@
+episode,test,scenario,mean_overload_stressed,mean_overload_unstressed,dependency_ratio,score3_pass
+2008,trigger_dependency,trigger_dep_2008,12.7,4.7,2.702,False
+2022,trigger_dependency,trigger_dep_2022,12.8,3.9,3.282,False
