@@ -1,0 +1,13 @@
+﻿apiVersion: v1
+data:
+  dashboards: "apiVersion: 1\r\n\r\nproviders:\r\n  - name: Food-Energy\r\n    orgId:
+    1\r\n    folder: Food-Energy\r\n    type: file\r\n    disableDeletion: false\r\n
+    \   updateIntervalSeconds: 30\r\n    allowUiUpdates: true\r\n    options:\r\n
+    \     path: /var/lib/grafana/dashboards"
+  datasources: "apiVersion: 1\r\n\r\ndatasources:\r\n  - name: Prometheus\r\n    type:
+    prometheus\r\n    uid: cfvgfg1d5huyod\r\n    access: proxy\r\n    url: http://prometheus:9090\r\n
+    \   isDefault: true\r\n    editable: true"
+kind: ConfigMap
+metadata:
+  name: grafana-provisioning
+  namespace: food-energy

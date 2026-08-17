@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: food-energy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:12.1.1
+          ports:
+            - containerPort: 3000
+
+          volumeMounts:
+            # Automatically configure the Prometheus datasource
+            - name: grafana-provisioning
+              mountPath: /etc/grafana/provisioning/datasources/prometheus.yaml
+              subPath: datasources
+
+            # Automatically load dashboards
+            - name: grafana-provisioning
+              mountPath: /etc/grafana/provisioning/dashboards/dashboard-provider.yaml
+              subPath: dashboards
+
+            # Dashboard JSON files
+            - name: grafana-dashboard
+              mountPath: /var/lib/grafana/dashboards
+
+      volumes:
+        - name: grafana-provisioning
+          configMap:
+            name: grafana-provisioning
+
+        - name: grafana-dashboard
+          configMap:
+            name: grafana-dashboard

@@ -3,6 +3,7 @@ uvicorn[standard]>=0.29
 pydantic>=2.6
 websockets>=12.0
 python-multipart>=0.0.9
+prometheus-fastapi-instrumentator
 
 # Scientific model dependencies (from model_src/.../requirements.txt)
 mesa==3.1.4  # PINNED (Phase A, this session): mesa>=2.0 silently resolves to a version whose Model._wrapped_step double-increments self.steps when combined with this codebase's own explicit increment -- see PHASE2_5_MERGE_CHANGE_REPORT.md. 3.1.4 is verified compatible with the Mesa-3-style single-arg Agent(model) constructor this code requires.

@@ -7,6 +7,8 @@ handles HTTP/WebSocket plumbing, validation, and JSON shaping.
 """
 import asyncio
 import json
+from prometheus_fastapi_instrumentator import Instrumentator
+from prometheus_client import Gauge
 from typing import Optional
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Query
@@ -28,6 +30,7 @@ from fastapi.responses import PlainTextResponse
 from . import advisor as _advisor
 from . import ai_providers as _ai_providers
 
+
 app = FastAPI(
     title="Food-Energy Systemic Risk Assessment API",
     description="REST/WebSocket API over the Gambhir/Homer-Dixon-framework "
@@ -42,6 +45,86 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+Instrumentator().instrument(app).expose(app)
+
+# Scientific model metrics exposed to Prometheus.
+# These values come directly from the ABM metrics dataframe.
+model_gfs = Gauge(
+    "food_energy_gfs",
+    "Global Food Security metric",
+)
+
+model_undernourished = Gauge(
+    "food_energy_undernourished",
+    "Fraction of population that is undernourished",
+)
+
+model_trade_collapse = Gauge(
+    "food_energy_trade_collapse",
+    "Trade collapse metric",
+)
+
+model_export_ban_rate = Gauge(
+    "food_energy_export_ban_rate",
+    "Fraction of nodes under export restrictions",
+)
+
+model_par_millions = Gauge(
+    "food_energy_par_millions",
+    "Population at risk in millions",
+)
+
+model_price_index = Gauge(
+    "food_energy_price_index",
+    "Food price index",
+)
+
+model_price_ratio = Gauge(
+    "food_energy_price_ratio",
+    "Food price ratio",
+)
+
+model_sav_scale = Gauge(
+    "food_energy_sav_scale",
+    "Strategic adaptive vulnerability scale",
+)
+
+model_mean_fs_index = Gauge(
+    "food_energy_mean_fs_index",
+    "Mean food security index",
+)
+
+model_mean_es_index = Gauge(
+    "food_energy_mean_es_index",
+    "Mean energy security index",
+)
+
+model_overload_food = Gauge(
+    "food_energy_overload_food",
+    "Number of food-overloaded nodes",
+)
+
+model_overload_energy = Gauge(
+    "food_energy_overload_energy",
+    "Number of energy-overloaded nodes",
+)
+
+def update_model_metrics(metrics: dict) -> None:
+    """Expose the latest ABM metrics to Prometheus."""
+
+    model_gfs.set(metrics.get("GFS", 0.0))
+    model_undernourished.set(metrics.get("U_undernourished", 0.0))
+    model_trade_collapse.set(metrics.get("TC_trade_collapse", 0.0))
+    model_export_ban_rate.set(metrics.get("EB_export_ban_rate", 0.0))
+    model_par_millions.set(metrics.get("PAR_millions", 0.0))
+    model_price_index.set(metrics.get("price_index", 0.0))
+    model_price_ratio.set(metrics.get("price_ratio", 0.0))
+    model_sav_scale.set(metrics.get("SAV_scale", 0.0))
+    model_mean_fs_index.set(metrics.get("mean_FS_index", 0.0))
+    model_mean_es_index.set(metrics.get("mean_ES_index", 0.0))
+    model_overload_food.set(metrics.get("n_overload_food", 0.0))
+    model_overload_energy.set(metrics.get("n_overload_energy", 0.0))
 
 
 @app.get("/api/health")
@@ -67,7 +150,16 @@ def get_scenarios():
 def get_baseline_metrics(steps: int = Query(10, ge=1, le=30), seed: int = 42):
     model = mb.get_baseline_model(steps=steps, seed=seed)
     ts = mb.global_metrics_timeseries(model)
-    return {"timeseries": ts, "summary": model.summary(), "current": ts[-1] if ts else None}
+
+    if ts:
+        update_model_metrics(ts[-1])
+
+    return {
+        "timeseries": ts,
+        "summary": model.summary(),
+        "current": ts[-1] if ts else None,
+    }
+
 
 
 @app.get("/api/baseline/nodes")
